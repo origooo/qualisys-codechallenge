@@ -19,13 +19,9 @@
 				params: {
 					players: null
 				}
-			}).state("gameover", {
-				url: "/gameover",
-				templateUrl: "app/stats.html",
-				controller: "GameoverCtrl"
 			});
 
-			$urlRouterProvider.otherwise("/play");
+			$urlRouterProvider.otherwise("/start");
 		}
 	]);
 
@@ -36,17 +32,11 @@
 			$scope,
 			$state
 		) {
-			$scope.data = { // NOTE: DEV
-				player1: "asdf",
-				player2: "asdf2"
-			};
 			$scope.start = function(form) {
-				console.log(form);
 				if (form.$valid) {
 					$state.go("play", {players: $scope.data});
 				}
 			};
-
 		}
 	]);
 
@@ -82,13 +72,12 @@
 				}
 			];
 
-
 			// Check if player namers are available. Otherwise return to 'start' state
-			// if ($stateParams.players === null) {
-				// $state.go("start");
-			// } else {
+			if ($stateParams.players === null) {
+				$state.go("start");
+			} else {
 				init(0);
-			// }
+			}
 
 			function init(firstPlayerId) {
 				$scope.board = [
@@ -98,10 +87,8 @@
 				];
 
 				$scope.currentPlayer = null;
-				$scope.players[0].name = "Gregory Peck"; // NOTE: DEV
-				$scope.players[1].name = "James Bond"; // NOTE: DEV
-				// $scope.players[0].name = $stateParams.players.player1;
-				// $scope.players[1].name = $stateParams.players.player2;
+				$scope.players[0].name = $stateParams.players.player1;
+				$scope.players[1].name = $stateParams.players.player2;
 
 				setCurrentPlayer(firstPlayerId);
 
@@ -185,24 +172,21 @@
 				var i = 0;
 				for (i = 0; i < b.length; i++) {
 		      if (b[i][0] == b[i][1] && b[i][0] == b[i][2] && !$scope.isNumber(b[i][0])){
-		        // alert(b[i][0]+" Wins");
 		        return true;
 		      }
 			  }
 			  for (i = 0; i < b.length; i++) {
 		      if (b[0][i] == b[1][i] && b[0][i] == b[2][i]  && !$scope.isNumber(b[0][i])){
-		        // alert(b[0][i]+" Wins");
 		        return true;
 		      }
 			  }
 			  if (b[0][0]==b[1][1] && b[0][0] == b[2][2]  && !$scope.isNumber(b[0][0])){
-			    // alert(b[0][0]+" Wins");
 	        return true;
 			  }
 			  if (b[0][2]==b[1][1] && b[0][2] == b[2][0]  && !$scope.isNumber(b[2][0])){
-			    // alert(b[1][1]+" Wins");
 	        return true;
 			  }
+				return false;
 			}
 		}
 	]).filter("reverse", function() {
