@@ -1,10 +1,71 @@
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 
-body {
-  background-color: orange;
-  color: blue;
+$border: 1px solid rgba(0,0,0,.1);
 
-  .container {
-    background-color: #fff;
+body {
+  background-color: #f9f9f9;
+  color: #777;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+h3 {
+  font-weight: 400;
+}
+
+.container {
+}
+
+.current-player {
+  margin: 20px 0px;
+
+  div:last-of-type {
+    font-size: 46px;
+  }
+}
+
+.board {
+  position: relative;
+  display: table;
+  table-layout: fixed;
+  width: 300px;
+  padding: 0px;
+  float: right;
+  margin-top: 30px;
+}
+
+.tile {
+  position: relative;
+  display: table-cell;
+  vertical-align: middle;
+  border: $border;
+  height: 100px;
+  width: 100px;
+  text-align: center;
+  background-color: white;
+  font-size: 64px;
+  padding: 0px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: oldlace;
+    color: white;
+  }
+
+  &.taken {
+    color: white;
+  }
+}
+
+.text {
+  &.green {
+    color: green;
+  }
+  &.blue {
+    color: darkblue;
   }
 }

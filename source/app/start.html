@@ -1,4 +1,13 @@
-<div class="container">
-  <h1>{{ title }}</h1>
-  <img src="images/TicTacToe.png">
-</div>
+<form name="form" ng-submit="start(form)" ng-model="data" novalidate>
+  <div>
+    Player names:
+  </div>
+  <div>
+    <label for="player2Name">Player 1:</label><input type="text" name="player1Name" placeholder="Name of player 1" ng-model="data.player1" required /><br>
+  </div>
+  <div>
+    <label for="player2Name">Player 2:</label><input type="text" name="player2Name" placeholder="Name of player 2" ng-model="data.player2" required />
+  </div>
+  <small ng-show="form.$submitted && (form.player1Name.$error.required || form.player2Name.$error.required)">Both players must have a name, duh...</small>
+  <button class="btn btn-primary">Start</button>
+</form>

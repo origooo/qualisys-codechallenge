@@ -1,0 +1,40 @@
+<div class="container">
+  <h1>{{ title }}</h1>
+
+  <div class="col-md-6">
+    <div class="board" id="board">
+      <div ng-repeat="row in board">
+        <div class="tile" ng-repeat="col in row.data track by $index" id="{{row.rowNumber}}{{col}}" ng-click="assignTile(row.rowNumber, col)">
+          <span ng-show="!isNumber(col)">{{ col }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="current-player">
+      <h3 ng-if="!gameover">Currently playing</h3>
+      <h3 ng-if="gameover" class="text green">We have a winner!</h3>
+      <div>
+        <button ng-show="gameover" class="btn btn-primary" ng-click="reset()">Play again</button>
+        <button ng-show="gameover" class="btn btn-default" ui-sref="start">Change players</button>
+      </div>
+      <div>{{ currentPlayer.name }}</div>
+
+    </div>
+    <div class="scoreboard">
+      <h3>Scoreboard:</h3>
+      <div>Last winner: {{ lastWinner }}</div>
+      <div>Winning streak: {{ longestStreak || "0" }} ({{ longestStreakName || "both players" }})</div>
+    </div>
+    <div class="scorebot">
+      <h3>Amazing live commentary</h3>
+      <div ng-repeat="comment in commentary | reverse track by $index">
+        {{ comment }}
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+</div>
